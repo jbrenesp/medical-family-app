@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_01_153800) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_02_134342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -100,11 +100,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_01_153800) do
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.bigint "family_id"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["family_id"], name: "index_users_on_family_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -129,5 +131,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_01_153800) do
   add_foreign_key "illnesses", "family_members"
   add_foreign_key "medications", "family_members"
   add_foreign_key "medications", "illnesses"
+  add_foreign_key "users", "families"
   add_foreign_key "vaccines", "family_members"
 end
