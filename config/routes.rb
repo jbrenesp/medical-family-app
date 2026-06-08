@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :families, only: [ :show, :new, :create, :edit, :update, :destroy ] do
-    resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ]
+    resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ] do
+      resources :illnesses, only: [ :show, :new, :create, :edit, :update, :destroy ]
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
