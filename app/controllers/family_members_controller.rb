@@ -37,6 +37,10 @@ class FamilyMembersController < ApplicationController
 
   private
 
+  def set_family
+    @family = Family.find(params[:family_id])
+  end
+
   def set_family_member
     @family_member = @family.family_members.find(params[:id])
   end
