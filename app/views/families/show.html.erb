@@ -1,2 +1,20 @@
-<h1>Families#show</h1>
-<p>Find me in app/views/families/show.html.erb</p>
+<div class="container mt-4">
+  <h1><%= @family.name %></h1>
+
+  <h3>Family Members</h3>
+  <% if @family_members.any? %>
+    <ul class="list-group mb-3">
+      <% @family_members.each do |member| %>
+        <li class="list-group-item">
+          <%= member.name %> — <%= member.member_type %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No family members yet.</p>
+  <% end %>
+
+  <%= link_to 'Add Family Member', new_family_family_member_path(@family), class: "btn btn-success" %>
+  <%= link_to 'Edit Family', edit_family_path(@family), class: "btn btn-warning" %>
+  <%= link_to 'Delete Family', family_path(@family), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+</div>
