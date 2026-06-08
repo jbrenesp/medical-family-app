@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h1>Edit Illness for <%= @family_member.name %></h1>
+
+  <%= form_with model: [@family_member, @illness] do |form| %>
+
+    <% if @illness.errors.any? %>
+      <div class="alert alert-danger">
+        <% @illness.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :start_date, class: "form-label" %>
+      <%= form.date_field :start_date, class: "form-control" %>
+    </div>
+
+    <%= form.submit "Update Illness", class: "btn btn-primary" %>
+
+  <% end %>
+</div>
