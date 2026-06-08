@@ -1,2 +1,20 @@
-<h1>Families#new</h1>
-<p>Find me in app/views/families/new.html.erb</p>
+<div class="container mt-4">
+  <h1>Create Your Family</h1>
+
+  <%= form_with model: @family do |form| %>
+    <% if @family.errors.any? %>
+      <div class="alert alert-danger">
+        <% @family.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <%= form.submit "Create Family", class: "btn btn-primary" %>
+  <% end %>
+</div>
