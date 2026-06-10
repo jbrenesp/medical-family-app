@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h1>Edit <%= @family_member.name %></h1>
+
+  <%= form_with model: [@family, @family_member] do |form| %>
+    <% if @family_member.errors.any? %>
+      <div class="alert alert-danger">
+        <% @family_member.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :member_type, class: "form-label" %>
+      <%= form.select :member_type, ['adult', 'child', 'pet'], {}, class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :date_of_birth, class: "form-label" %>
+      <%= form.date_field :date_of_birth, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :blood_type, class: "form-label" %>
+      <%= form.text_field :blood_type, class: "form-control" %>
+    </div>
+
+    <div class="mb-3 form-check">
+      <%= form.check_box :is_private, class: "form-check-input" %>
+      <%= form.label :is_private, "Keep my records private", class: "form-check-label" %>
+    </div>
+
+    <%= form.submit "Update Member", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to 'Cancel', family_family_member_path(@family, @family_member), class: "btn btn-secondary mt-2" %>
+</div>
