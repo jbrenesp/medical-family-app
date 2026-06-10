@@ -6,8 +6,8 @@
     <ul class="list-group mb-3">
       <% @family_members.each do |member| %>
         <li class="list-group-item">
-          <%= member.name %> — <%= member.member_type %>
-        </li>
+          <%= link_to member.name, family_family_member_path(@family, member) %> — <%= member.member_type %>
+          </li>
       <% end %>
     </ul>
   <% else %>
