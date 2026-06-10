@@ -13,7 +13,7 @@ class IllnessesController < ApplicationController
   def create
     @illness = @family_member.illnesses.build(illness_params)
     if @illness.save
-      redirect_to @illness, notice: "Illness correctly added to #{@family_member.name}"
+      redirect_to family_family_member_illness_path(@family, @family_member, @illness), notice: "Illness correctly added to #{@family_member.name}"
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class IllnessesController < ApplicationController
 
   def update
     if @illness.update(illness_params)
-      redirect_to @illness, notice: "Illness was successfully updated."
+      redirect_to family_family_member_illness_path(@family, @family_member, @illness), notice: "Illness was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -32,13 +32,14 @@ class IllnessesController < ApplicationController
 
   def destroy
     @illness.destroy
-    redirect_to @family_member, notice: "Illness was successfully deleted."
+    redirect_to family_family_member_path(@family, @family_member), notice: "Illness was successfully deleted."
   end
 
   private
 
   def set_family_member
-    @family_member = FamilyMember.find(params[:family_member_id])
+    @family = current_user.family
+    @family_member = current_user.family.family_members.find(params[:family_member_id])
   end
 
   def set_illness
@@ -46,6 +47,6 @@ class IllnessesController < ApplicationController
   end
 
   def illness_params
-      params.require(:illness).permit(:name, :start_date)
+      params.require(:illness).permit(:name, :start_date, :end_date, :notes)
   end
 end
