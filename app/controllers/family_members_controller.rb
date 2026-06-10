@@ -7,13 +7,13 @@ class FamilyMembersController < ApplicationController
   end
 
   def new
-    @family_member = FamilyMember.new
+    @family_member = @family.family_members.build
   end
 
   def create
-    @family_member = FamilyMember.new(family_member_params)
+    @family_member = @family.family_members.build(family_member_params)
     if @family_member.save
-      redirect_to @family_member, notice: "Family member was successfully created."
+      redirect_to family_family_member_path(@family, @family_member), notice: "Family member was successfully created."
     else
         render :new, status: :unprocessable_entity
     end
