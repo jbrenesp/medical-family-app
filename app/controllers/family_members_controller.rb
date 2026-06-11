@@ -24,7 +24,7 @@ class FamilyMembersController < ApplicationController
 
   def update
     if @family_member.update(family_member_params)
-      redirect_to @family_member, notice: "Family member updated."
+      redirect_to family_family_member_path(@family, @family_member), notice: "Family member updated."
     else
       render :edit, status: :unprocessable_entity
     end
