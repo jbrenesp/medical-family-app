@@ -7,4 +7,23 @@
   <%= link_to 'Edit', edit_family_family_member_path(@family, @family_member), class: "btn btn-warning" %>
   <%= link_to 'Delete', family_family_member_path(@family, @family_member), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
   <%= link_to 'Back to Family', family_path(@family), class: "btn btn-secondary" %>
+  
+  <h3>Illnesses</h3>
+  <% if @family_member.illnesses.any? %>
+    <ul class="list-group mb-3">
+      <% @family_member.illnesses.each do |illness| %>
+        <li class="list-group-item">
+          <%= link_to illness.name, family_family_member_illness_path(@family, @family_member, illness) %>
+          — Started: <%= illness.start_date =%>
+          — Ended: <%= illness.end_date.present? ? illness.end_date : "Not entered yet" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No illnesses recorded yet.</p>
+  <% end %>
+
+  <%= link_to 'Add Illness', new_family_family_member_illness_path(@family, @family_member), class: "btn btn-success" %>
+
+
 </div>
