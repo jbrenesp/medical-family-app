@@ -4,6 +4,7 @@
 
   <div class="card p-3 mt-3">
     <p><strong>Name:</strong> <%= @illness.name %></p>
+    <p><strong>Notes:</strong> <%= @illness.notes %></p>
     <p><strong>Start Date:</strong> <%= @illness.start_date %></p>
     <p><strong>End Date:</strong> <%= @illness.end_date.present? ? @illness.end_date : "Not entered yet" %></p></p>
     <p><strong>Family Member:</strong> <%= @family_member.name %></p>
