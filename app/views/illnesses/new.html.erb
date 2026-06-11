@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <h1>Create Illness for <%= @family_member.name %></h1>
 
-  <%= form_with model: [@family_member, @illness] do |form| %>
+  <%= form_with model: [@family, @family_member, @illness] do |form| %>
 
     <% if @illness.errors.any? %>
       <div class="alert alert-danger">
