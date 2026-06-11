@@ -4,6 +4,7 @@ class FamilyMembersController < ApplicationController
   before_action :set_family_member, only: [ :show, :edit, :update, :destroy ]
 
   def show
+    @illnesses = @family_member.illnesses.order(start_date: :desc)
   end
 
   def new

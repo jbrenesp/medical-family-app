@@ -4,7 +4,6 @@ class IllnessesController < ApplicationController
   before_action :set_illness, only: [ :show, :edit, :update, :destroy ]
 
   def show
-    @illnesses = @family_member.illnesses.order(start_date: :desc)
   end
 
   def new
