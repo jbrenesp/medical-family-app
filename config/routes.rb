@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ] do
       resources :illnesses, only: [ :show, :new, :create, :edit, :update, :destroy ]
       resources :doctor_visits, only: [ :show, :new, :create, :edit, :update, :destroy ]
+      resources :medications, only: [ :show, :new, :create, :edit, :update, :destroy ]
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
