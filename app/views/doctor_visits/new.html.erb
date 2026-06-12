@@ -1,2 +1,47 @@
-<h1>DoctorVisits#new</h1>
-<p>Find me in app/views/doctor_visits/new.html.erb</p>
+<div class="container mt-4">
+  <h1>Create Doctor visit for <%= @family_member.name %></h1>
+
+  <%= form_with model: [@family, @family_member, @doctor_visit] do |form| %>
+
+    <% if @doctor_visit.errors.any? %>
+      <div class="alert alert-danger">
+        <% @doctor_visit.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+  <div class="mb-3">
+      <%= form.label :doctor_name, class: "form-label" %>
+      <%= form.text_field :doctor_name, class: "form-control" %>
+    </div>
+
+     <div class="mb-3">
+      <%= form.label :doctor_city, class: "form-label" %>
+      <%= form.text_field :doctor_city, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :visit_date, class: "form-label" %>
+      <%= form.date_field :visit_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :visit_type, class: "form-label" %>
+      <%= form.text_field :visit_type, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :notes, class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control" %>
+    </div>
+
+
+   
+
+    <%= form.submit "Create Doctor Visit", class: "btn btn-primary" %>
+
+    <%= link_to 'Cancel', family_family_member_path(@family, @family_member), class: "btn btn-secondary mt-2" %>
+
+  <% end %>
+</div>
