@@ -15,7 +15,7 @@
         <li class="list-group-item">
           <%= link_to illness.name, family_family_member_illness_path(@family, @family_member, illness) %>
           — Started: <%= illness.start_date =%>
-          — Ended: <%= illness.end_date.present? ? illness.end_date : "Not entered yet" %>
+          — Ended: <%= illness.end_date.present? ? illness.end_date : "Still active" %>
         </li>
       <% end %>
     </ul>
@@ -24,6 +24,26 @@
   <% end %>
 
   <%= link_to 'Add Illness', new_family_family_member_illness_path(@family, @family_member), class: "btn btn-success" %>
+
+  <h3>Doctor Visits</h3>
+  <% if @family_member.doctor_visits.any? %>
+    <ul class="list-group mb-3">
+      <% @family_member.doctor_visits.order(visit_date: :desc).each do |visit| %>
+        <li class="list-group-item">
+          <%= link_to visit.doctor_name, family_family_member_doctor_visit_path(@family, @family_member, visit) %>
+          — <%= visit.visit_type %> — <%= visit.visit_date %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No doctor visits recorded yet.</p>
+  <% end %>
+
+  
+
+  
+  <%= link_to 'Add Doctor Visit', new_family_family_member_doctor_visit_path(@family, @family_member), class: "btn btn-success" %>
+
 
 
 </div>
