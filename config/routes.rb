@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  get "doctor_visits/show"
-  get "doctor_visits/new"
-  get "doctor_visits/create"
-  get "doctor_visits/edit"
-  get "doctor_visits/update"
-  get "doctor_visits/destroy"
   devise_for :users
   resources :families, only: [ :show, :new, :create, :edit, :update, :destroy ] do
     resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ] do
       resources :illnesses, only: [ :show, :new, :create, :edit, :update, :destroy ]
+      resources :doctor_visits, only: [ :show, :new, :create, :edit, :update, :destroy ]
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
