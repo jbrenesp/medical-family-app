@@ -1,2 +1,54 @@
-<h1>Medications#edit</h1>
-<p>Find me in app/views/medications/edit.html.erb</p>
+<div class="container mt-4">
+  <h1>Edit Medication for <%= @family_member.name %></h1>
+
+  <%= form_with model: [@family, @family_member, @medication] do |form| %>
+
+    <% if @medication.errors.any? %>
+      <div class="alert alert-danger">
+        <% @medication.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :start_date, class: "form-label" %>
+      <%= form.date_field :start_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :end_date, class: "form-label" %>
+      <%= form.date_field :end_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :medication_type, class: "form-label" %>
+      <%= form.text_field :medication_type, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :illness_id, "Related Illness (optional)", class: "form-label" %>
+        <%= form.collection_select :illness_id, @family_member.illnesses, :id, :name, { include_blank: "None" }, class: "form-select" %>
+    </div>
+
+
+    <div class="mb-3">
+      <%= form.label :notes, class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control" %>
+    </div>
+
+
+
+    
+
+    <%= form.submit "Update Medication", class: "btn btn-primary" %>
+
+    <%= link_to 'Cancel', family_family_member_medication_path(@family, @family_member, @medication), class: "btn btn-secondary mt-2" %>
+
+  <% end %>
+</div>

@@ -1,2 +1,26 @@
-<h1>Medications#show</h1>
-<p>Find me in app/views/medications/show.html.erb</p>
+<div class="container mt-4">
+
+  <h1>Medication Details</h1>
+
+  <div class="card p-3 mt-3">
+    <p><strong>Family Member:</strong> <%= @family_member.name %></p>
+    <p><strong>Name:</strong> <%= @medication.name %></p>
+    <p><strong>Medication type:</strong> <%= @medication.medication_type %></p>
+    <p><strong>Start date:</strong> <%= @medication.start_date %></p>
+    <p><strong>End Date:</strong> <%= @medication.end_date.present? ? @medication.end_date : "Not entered yet" %></p>
+    <p><strong>Related Illness:</strong> <%= @medication.illness&.name || "None" %></p>
+    <p><strong>Notes:</strong> <%= @medication.notes %></p>
+    
+  </div>
+
+  <div class="mt-3">
+    <%= link_to "Edit", edit_family_family_member_medication_path(@family, @family_member, @medication),
+        class: "btn btn-warning" %>
+    <%= link_to 'Delete', family_family_member_medication_path(@family, @family_member, @medication), 
+    data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
+
+    <%= link_to "Back", family_family_member_path(@family, @family_member),
+        class: "btn btn-secondary" %>
+  </div>
+
+</div>

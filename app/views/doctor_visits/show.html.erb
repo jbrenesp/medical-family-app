@@ -13,7 +13,7 @@
   </div>
 
   <div class="mt-3">
-    <%= link_to "Edit", edit_family_family_member_doctor_visit_path(@family_member, @family_member, @doctor_visit),
+    <%= link_to "Edit", edit_family_family_member_doctor_visit_path(@family, @family_member, @doctor_visit),
         class: "btn btn-warning" %>
     <%= link_to 'Delete', family_family_member_doctor_visit_path(@family, @family_member, @doctor_visit), 
     data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
