@@ -44,6 +44,23 @@
   
   <%= link_to 'Add Doctor Visit', new_family_family_member_doctor_visit_path(@family, @family_member), class: "btn btn-success" %>
 
+  <hr>
+
+<h3>Medications</h3>
+<% if @family_member.medications.any? %>
+  <ul class="list-group mb-3">
+    <% @family_member.medications.order(start_date: :desc).each do |medication| %>
+      <li class="list-group-item">
+        <%= link_to medication.name, family_family_member_medication_path(@family, @family_member, medication) %>
+        — <%= medication.medication_type %> — Started: <%= medication.start_date %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No medications recorded yet.</p>
+<% end %>
+
+<%= link_to 'Add Medication', new_family_family_member_medication_path(@family, @family_member), class: "btn btn-success" %>
 
 
 </div>
