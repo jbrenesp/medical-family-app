@@ -64,5 +64,22 @@
 
 <%= link_to 'Add Medication', new_family_family_member_medication_path(@family, @family_member), class: "btn btn-success" %>
 
+<h3>Allergies</h3>
+<% if @family_member.allergies.any? %>
+  <ul class="list-group mb-3">
+    <% @family_member.allergies.order(diagnosed_date: :desc).each do |allergy| %>
+      <li class="list-group-item">
+        <%= link_to allergy.name, family_family_member_allergy_path(@family, @family_member, allergy) %>
+        — <%= allergy.allergy_type %> 
+        — Diagnosed date: <%= allergy.diagnosed_date %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No allergies recorded yet.</p>
+<% end %>
+
+<%= link_to 'Add Allergy', new_family_family_member_allergy_path(@family, @family_member), class: "btn btn-success" %>
+
 
 </div>
