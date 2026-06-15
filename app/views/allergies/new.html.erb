@@ -1,2 +1,45 @@
-<h1>Allergies#new</h1>
-<p>Find me in app/views/allergies/new.html.erb</p>
+<div class="container mt-4">
+  <h1>Create Allergy for <%= @family_member.name %></h1>
+
+  <%= form_with model: [@family, @family_member, @allergy] do |form| %>
+
+    <% if @allergy.errors.any? %>
+      <div class="alert alert-danger">
+        <% @allergy.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :allergy_type, class: "form-label" %>
+      <%= form.text_field :allergy_type, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :diagnosed_date, class: "form-label" %>
+      <%= form.date_field :diagnosed_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :notes, class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :severity, class: "form-label" %>
+        <%= form.select :severity, ['mild', 'moderate', 'severe'], {}, class: "form-select" %>
+    </div>
+
+
+    <%= form.submit "Create Allergy", class: "btn btn-primary" %>
+
+    <%= link_to 'Cancel', family_family_member_path(@family, @family_member), class: "btn btn-secondary mt-2" %>
+
+  <% end %>
+</div>

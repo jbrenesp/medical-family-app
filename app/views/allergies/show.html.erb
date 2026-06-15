@@ -1,2 +1,26 @@
-<h1>Allergies#show</h1>
-<p>Find me in app/views/allergies/show.html.erb</p>
+<div class="container mt-4">
+
+  <h1>Allergies Details</h1>
+
+  <div class="card p-3 mt-3">
+    <p><strong>Family Member:</strong> <%= @family_member.name %></p>
+    <p><strong>Allergy:</strong> <%= @allergy.name %></p>
+    <p><strong>Allergy type:</strong> <%= @allergy.allergy_type %></p>
+    <p><strong>Diagnosed date:</strong> <%= @allergy.diagnosed_date %></p>
+    <p><strong>Severity:</strong> <%= @allergy.severity %></p>
+    <p><strong>Notes:</strong> <%= @allergy.notes %></p>
+    
+    
+  </div>
+
+  <div class="mt-3">
+    <%= link_to "Edit", edit_family_family_member_allergy_path(@family, @family_member, @allergy),
+        class: "btn btn-warning" %>
+    <%= link_to 'Delete', family_family_member_allergy_path(@family, @family_member, @allergy), 
+    data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
+
+    <%= link_to "Back", family_family_member_path(@family, @family_member),
+        class: "btn btn-secondary" %>
+  </div>
+
+</div>
