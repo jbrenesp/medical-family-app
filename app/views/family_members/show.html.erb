@@ -14,7 +14,7 @@
       <% @family_member.illnesses.each do |illness| %>
         <li class="list-group-item">
           <%= link_to illness.name, family_family_member_illness_path(@family, @family_member, illness) %>
-          — Started: <%= illness.start_date =%>
+          — Started: <%= illness.start_date %>
           — Ended: <%= illness.end_date.present? ? illness.end_date : "Still active" %>
         </li>
       <% end %>
@@ -67,7 +67,7 @@
 <h3>Allergies</h3>
 <% if @family_member.allergies.any? %>
   <ul class="list-group mb-3">
-    <% @family_member.allergies.order(diagnosed_date: :desc).each do |allergy| %>
+    <% @family_member.allergies.order(created_at: :desc).each do |allergy| %>
       <li class="list-group-item">
         <%= link_to allergy.name, family_family_member_allergy_path(@family, @family_member, allergy) %>
         — <%= allergy.allergy_type %> 
