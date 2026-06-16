@@ -32,9 +32,16 @@
     </div>
 
     <div class="mb-3">
+      <%= form.label :illness_id, class: "form-label" %>
+      <%= form.collection_select :illness_id, @family_member.illnesses, :id, :name, { prompt: "Select an illness (optional)" }, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
       <%= form.label :notes, class: "form-label" %>
       <%= form.text_area :notes, class: "form-control" %>
     </div>
+
+    
 
 
    
