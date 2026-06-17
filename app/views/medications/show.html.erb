@@ -8,7 +8,14 @@
     <p><strong>Medication type:</strong> <%= @medication.medication_type %></p>
     <p><strong>Start date:</strong> <%= @medication.start_date %></p>
     <p><strong>End Date:</strong> <%= @medication.end_date.present? ? @medication.end_date : "Not entered yet" %></p>
-    <p><strong>Related Illness:</strong> <%= @medication.illness&.name || "None" %></p>
+    <p><strong>Related Illness:</strong>
+      <% if @medication.illness %>
+        <%= link_to @medication.illness.name,
+              family_family_member_illness_path(@family, @family_member, @medication.illness) %>
+      <% else %>
+        Not assigned
+      <% end %>
+    </p>
     <p><strong>Notes:</strong> <%= @medication.notes %></p>
     
   </div>
