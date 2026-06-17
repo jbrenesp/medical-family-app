@@ -2,13 +2,27 @@
 
   <h1>Illness Details</h1>
 
-  <div class="card p-3 mt-3">
-    <p><strong>Name:</strong> <%= @illness.name %></p>
-    <p><strong>Notes:</strong> <%= @illness.notes %></p>
-    <p><strong>Start Date:</strong> <%= @illness.start_date %></p>
-    <p><strong>End Date:</strong> <%= @illness.end_date.present? ? @illness.end_date : "Not entered yet" %></p></p>
-    <p><strong>Family Member:</strong> <%= @family_member.name %></p>
-  </div>
+ <div class="card p-3 mt-3">
+  <p><strong>Family Member:</strong> <%= @family_member.name %></p>
+  <p><strong>Name:</strong> <%= @illness.name %></p>
+  <p><strong>Start Date:</strong> <%= @illness.start_date %></p>
+  <p><strong>End Date:</strong> <%= @illness.end_date.present? ? @illness.end_date : "Not entered yet" %></p>
+  <p><strong>Notes:</strong> <%= @illness.notes %></p>
+  <p><strong>Doctor Visits:</strong>
+  <% if @illness.doctor_visits.any? %>
+    <ul class="list-unstyled mt-2">
+      <% @illness.doctor_visits.each do |visit| %>
+        <li>
+          <%= link_to "#{visit.doctor_name} — #{visit.visit_date}",
+                family_family_member_doctor_visit_path(@family, @family_member, visit) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    No doctor visits linked to this illness yet.
+  <% end %></p>
+  
+</div>
 
   <div class="mt-3">
     <%= link_to "Edit", edit_family_family_member_illness_path(@family_member.family, @family_member, @illness),
