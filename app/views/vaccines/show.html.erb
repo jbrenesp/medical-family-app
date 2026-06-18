@@ -1,2 +1,25 @@
-<h1>Vaccines#show</h1>
-<p>Find me in app/views/vaccines/show.html.erb</p>
+<div class="container mt-4">
+
+  <h1>Vaccine Details</h1>
+
+  <div class="card p-3 mt-3">
+    <p><strong>Family Member:</strong> <%= @family_member.name %></p>
+    <p><strong>Name:</strong> <%= @vaccine.name %></p>
+    <p><strong>Date:</strong> <%= @vaccine.vaccine_date %></p>
+    <p><strong>Next due date:</strong> <%= @vaccine.next_due_date.present? ? @vaccine.next_due_date : "Not entered yet" %></p>
+    <p><strong>Dose number:</strong> <%= @vaccine.dose_number %></p>
+    <p><strong>Notes:</strong> <%= @vaccine.notes %></p>
+    
+  </div>
+
+  <div class="mt-3">
+    <%= link_to "Edit", edit_family_family_member_vaccine_path(@family, @family_member, @vaccine),
+        class: "btn btn-warning" %>
+    <%= link_to 'Delete', family_family_member_vaccine_path(@family, @family_member, @vaccine), 
+    data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
+
+    <%= link_to "Back", family_family_member_path(@family, @family_member),
+        class: "btn btn-secondary" %>
+  </div>
+
+</div>

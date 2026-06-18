@@ -81,5 +81,20 @@
 
 <%= link_to 'Add Allergy', new_family_family_member_allergy_path(@family, @family_member), class: "btn btn-success" %>
 
+<h3>Vaccines</h3>
+<% if @family_member.vaccines.any? %>
+  <ul class="list-group mb-3">
+    <% @family_member.vaccines.order(created_at: :desc).each do |vaccine| %>
+      <li class="list-group-item">
+        <%= link_to vaccine.name, family_family_member_vaccine_path(@family, @family_member, vaccine) %>
+        — Date: <%= vaccine.vaccine_date %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No vaccines recorded yet.</p>
+<% end %>
+
+<%= link_to 'Add Vaccine', new_family_family_member_vaccine_path(@family, @family_member), class: "btn btn-success" %>
 
 </div>

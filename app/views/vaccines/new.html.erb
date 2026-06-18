@@ -1,2 +1,47 @@
-<h1>Vaccines#new</h1>
-<p>Find me in app/views/vaccines/new.html.erb</p>
+<div class="container mt-4">
+  <h1>Create Vaccine for <%= @family_member.name %></h1>
+
+  <%= form_with model: [@family, @family_member, @vaccine] do |form| %>
+
+    <% if @vaccine.errors.any? %>
+      <div class="alert alert-danger">
+        <% @vaccine.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :vaccine_date, class: "form-label" %>
+      <%= form.date_field :vaccine_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :next_due_date, class: "form-label" %>
+      <%= form.date_field :next_due_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :dose_number, class: "form-label" %>
+      <%= form.number_field :dose_number, class: "form-control" %>
+    </div>
+
+
+    <div class="mb-3">
+      <%= form.label :notes, class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control" %>
+    </div>
+
+   
+
+    <%= form.submit "Create Vaccine", class: "btn btn-primary" %>
+
+    <%= link_to 'Cancel', family_family_member_path(@family, @family_member), class: "btn btn-secondary mt-2" %>
+
+  <% end %>
+</div>
