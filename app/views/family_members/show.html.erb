@@ -97,4 +97,20 @@
 
 <%= link_to 'Add Vaccine', new_family_family_member_vaccine_path(@family, @family_member), class: "btn btn-success" %>
 
+<h3>Checkups</h3>
+<% if @family_member.checkups.any? %>
+  <ul class="list-group mb-3">
+    <% @family_member.checkups.order(created_at: :desc).each do |checkup| %>
+      <li class="list-group-item">
+        <%= link_to checkup.checkup_type, family_family_member_checkup_path(@family, @family_member, checkup) %>
+        — Date: <%= checkup.date %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No checkups recorded yet.</p>
+<% end %>
+
+<%= link_to 'Add Checkup', new_family_family_member_checkup_path(@family, @family_member), class: "btn btn-success" %>
+
 </div>
