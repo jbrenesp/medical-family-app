@@ -39,7 +39,7 @@ class FamilyMembersController < ApplicationController
   private
 
   def set_family
-    @family = Family.find(params[:family_id])
+    @family = current_user.family
   end
 
   def set_family_member
