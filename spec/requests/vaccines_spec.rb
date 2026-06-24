@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MedicationsController, type: :request do
+RSpec.describe VaccinesController, type: :request do
   let(:user) { create(:user) }
   let(:family) { create(:family) }
   let(:family_member) { create(:family_member, family: family) }
