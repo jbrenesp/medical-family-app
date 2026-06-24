@@ -17,7 +17,7 @@ class CheckupsController < ApplicationController
     if @checkup.save
       redirect_to family_family_member_checkup_path(@family, @family_member, @checkup), notice: "Checkup successfully added to #{@family_member.name}"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -25,7 +25,7 @@ class CheckupsController < ApplicationController
     if @checkup.update(checkup_params)
       redirect_to family_family_member_checkup_path(@family, @family_member, @checkup), notice: "Checkup successfully updated"
     else
-      render edit:, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
