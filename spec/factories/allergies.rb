@@ -1,10 +1,8 @@
 FactoryBot.define do
   factory :allergy do
-    family_member { nil }
-    name { "MyString" }
-    severity { "MyString" }
+    association :family_member
+    name { Faker::Name.first_name }
+    severity { "severe" }
     allergy_type { "MyString" }
-    notes { "MyText" }
-    diagnosed_date { "2026-06-01" }
   end
 end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe MedicationsController, type: :request do
+RSpec.describe AllergiesController, type: :request do
   let(:user) { create(:user) }
   let(:family) { create(:family) }
   let(:family_member) { create(:family_member, family: family) }
-  let(:vaccine) { create(:vaccine, family_member: family_member) }
+  let(:allergy) { create(:allergy, family_member: family_member) }
 
   before do
     user.update(family: family)
@@ -13,29 +13,29 @@ RSpec.describe MedicationsController, type: :request do
 
   describe "GET #show" do
     it "returns http success" do
-      get family_family_member_vaccine_path(family, family_member, vaccine)
+      get family_family_member_allergy_path(family, family_member, allergy)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #new" do
     it "returns http success" do
-      get new_family_family_member_vaccine_path(family, family_member)
+      get new_family_family_member_allergy_path(family, family_member)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a vaccine and redirects" do
-        post family_family_member_vaccines_path(family, family_member), params: { vaccine: { name: "Influenza", vaccine_date: "2026-01-01" } }
+      it "creates an allergy and redirects" do
+        post family_family_member_allergies_path(family, family_member), params: { allergy: { name: "Aines", allergy_type: "environmental", severity: "mild" } }
         expect(response).to have_http_status(:redirect)
       end
     end
 
     context "with invalid params" do
       it "re-renders new" do
-        post family_family_member_vaccines_path(family, family_member), params: { vaccine: { name: "" } }
+        post family_family_member_allergies_path(family, family_member), params: { allergy: { name: "" } }
         expect(response).to have_http_status(:unprocessable_content)
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe MedicationsController, type: :request do
 
   describe "GET #edit" do
     it "returns http success" do
-      get edit_family_family_member_vaccine_path(family, family_member, vaccine)
+      get edit_family_family_member_allergy_path(family, family_member, allergy)
       expect(response).to have_http_status(:success)
     end
   end
@@ -51,14 +51,14 @@ RSpec.describe MedicationsController, type: :request do
   describe "PATCH #update" do
     context "with valid params" do
       it "updates and redirects" do
-        patch family_family_member_vaccine_path(family, family_member, vaccine), params: { vaccine: { name: "Updated Name" } }
+        patch family_family_member_allergy_path(family, family_member, allergy), params: { allergy: { name: "Updated Name" } }
         expect(response).to have_http_status(:redirect)
       end
     end
 
     context "with invalid params" do
       it "re-renders edit" do
-        patch family_family_member_vaccine_path(family, family_member, vaccine), params: { vaccine: { name: "" } }
+        patch family_family_member_allergy_path(family, family_member, allergy), params: { allergy: { name: "" } }
         expect(response).to have_http_status(:unprocessable_content)
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe MedicationsController, type: :request do
 
   describe "DELETE #destroy" do
     it "destroys and redirects" do
-      delete family_family_member_vaccine_path(family, family_member, vaccine)
+      delete family_family_member_allergy_path(family, family_member, allergy)
       expect(response).to redirect_to(family_family_member_path(family, family_member))
     end
   end
@@ -74,10 +74,10 @@ RSpec.describe MedicationsController, type: :request do
   describe "IDOR protection" do
     let(:other_family) { create(:family) }
     let(:other_family_member) { create(:family_member, family: other_family) }
-    let(:other_vaccine) { create(:vaccine, family_member: other_family_member) }
+    let(:other_allergy) { create(:allergy, family_member: other_family_member) }
 
-    it "cannot access another family's vaccine" do
-      get family_family_member_vaccine_path(other_family, other_family_member, other_vaccine)
+    it "cannot access another family's allergy" do
+      get family_family_member_allergy_path(other_family, other_family_member, other_allergy)
       expect(response).not_to have_http_status(:success)
     end
   end
