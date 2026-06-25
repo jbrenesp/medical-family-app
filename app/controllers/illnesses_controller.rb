@@ -3,6 +3,10 @@ class IllnessesController < ApplicationController
   before_action :set_family_member
   before_action :set_illness, only: [ :show, :edit, :update, :destroy ]
 
+  def index
+    @illnesses = @family_member.illnesses.order(start_date: :desc)
+  end
+
   def show
   end
 
