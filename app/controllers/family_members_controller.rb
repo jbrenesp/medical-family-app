@@ -4,7 +4,9 @@ class FamilyMembersController < ApplicationController
   before_action :set_family_member, only: [ :show, :edit, :update, :destroy ]
 
   def show
-    @illnesses = @family_member.illnesses.order(start_date: :desc)
+    @active_illnesses = @family_member.illnesses.where(end_date: nil).order(start_date: :desc)
+    @active_medications = @family_member.medications.where(end_date: nil).order(start_date: :desc)
+    @upcoming_visits = @family_member.doctor_visits.where("visit_date >= ?", Date.today).order(visit_date: :asc)
   end
 
   def new

@@ -1,116 +1,36 @@
 <div class="container mt-4">
   <h1><%= @family_member.name %></h1>
-  <p>Type: <%= @family_member.member_type %></p>
-  <p>Blood Type: <%= @family_member.blood_type %></p>
-  <p>Date of Birth: <%= @family_member.date_of_birth %></p>
+  <p><strong>Type:</strong> <%= @family_member.member_type %></p>
+  <p><strong>Blood Type:</strong> <%= @family_member.blood_type %></p>
+  <p><strong>Date of Birth:</strong> <%= @family_member.date_of_birth %></p>
 
-  <%= link_to 'Edit', edit_family_family_member_path(@family, @family_member), class: "btn btn-warning" %>
-  <%= link_to 'Delete', family_family_member_path(@family, @family_member), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-  <%= link_to 'Back to Family', family_path(@family), class: "btn btn-secondary" %>
-  
-  <h3>Illnesses</h3>
-  <% if @family_member.illnesses.any? %>
-    <ul class="list-group mb-3">
-      <% @family_member.illnesses.each do |illness| %>
-        <li class="list-group-item">
-          <%= link_to illness.name, family_family_member_illness_path(@family, @family_member, illness) %>
-          — Started: <%= illness.start_date %>
-          — Ended: <%= illness.end_date.present? ? illness.end_date : "Still active" %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No illnesses recorded yet.</p>
+  <% @active_illnesses.each do |illness| %>
+    <p><strong>Illness:</strong> <%= link_to illness.name, family_family_member_illness_path(@family, @family_member, illness) %> — Started: <%= illness.start_date %></p>
   <% end %>
 
-  <%= link_to 'Add Illness', new_family_family_member_illness_path(@family, @family_member), class: "btn btn-success" %>
-
-  <h3>Doctor Visits</h3>
-  <% if @family_member.doctor_visits.any? %>
-    <ul class="list-group mb-3">
-      <% @family_member.doctor_visits.order(visit_date: :desc).each do |visit| %>
-        <li class="list-group-item">
-          <%= link_to visit.doctor_name, family_family_member_doctor_visit_path(@family, @family_member, visit) %>
-          — <%= visit.visit_type %> — <%= visit.visit_date %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No doctor visits recorded yet.</p>
+  <% @upcoming_visits.each do |visit| %>
+    <p><strong>Doctor Visit:</strong> <%= link_to visit.doctor_name, family_family_member_doctor_visit_path(@family, @family_member, visit) %> — <%= visit.visit_type %> — <%= visit.visit_date %></p>
   <% end %>
 
-  
-
-  
-  <%= link_to 'Add Doctor Visit', new_family_family_member_doctor_visit_path(@family, @family_member), class: "btn btn-success" %>
+  <% @active_medications.each do |medication| %>
+    <p><strong>Medication:</strong> <%= link_to medication.name, family_family_member_medication_path(@family, @family_member, medication) %> — <%= medication.medication_type %> — Started: <%= medication.start_date %></p>
+  <% end %>
 
   <hr>
 
-<h3>Medication and Suplements</h3>
-<% if @family_member.medications.any? %>
-  <ul class="list-group mb-3">
-    <% @family_member.medications.order(start_date: :desc).each do |medication| %>
-      <li class="list-group-item">
-        <%= link_to medication.name, family_family_member_medication_path(@family, @family_member, medication) %>
-        — <%= medication.medication_type %> 
-        — Started: <%= medication.start_date %>
-        - Ended: <%= medication.end_date.present? ? medication.end_date : "Still active" %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No medications recorded yet.</p>
-<% end %>
+  <div class="d-flex gap-2 flex-wrap mt-2">
+    <%= link_to 'Illnesses', family_family_member_illnesses_path(@family, @family_member), class: "btn btn-outline-primary" %>
+    <%= link_to 'Doctor Visits', family_family_member_doctor_visits_path(@family, @family_member), class: "btn btn-outline-primary" %>
+    <%= link_to 'Medications', family_family_member_medications_path(@family, @family_member), class: "btn btn-outline-primary" %>
+    <%= link_to 'Allergies', family_family_member_allergies_path(@family, @family_member), class: "btn btn-outline-primary" %>
+    <%= link_to 'Vaccines', family_family_member_vaccines_path(@family, @family_member), class: "btn btn-outline-primary" %>
+    <%= link_to 'Checkups', family_family_member_checkups_path(@family, @family_member), class: "btn btn-outline-primary" %>
+  </div>
 
-<%= link_to 'Add Medication', new_family_family_member_medication_path(@family, @family_member), class: "btn btn-success" %>
-
-<h3>Allergies</h3>
-<% if @family_member.allergies.any? %>
-  <ul class="list-group mb-3">
-    <% @family_member.allergies.order(created_at: :desc).each do |allergy| %>
-      <li class="list-group-item">
-        <%= link_to allergy.name, family_family_member_allergy_path(@family, @family_member, allergy) %>
-        — <%= allergy.allergy_type %> 
-        — Diagnosed date: <%= allergy.diagnosed_date %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No allergies recorded yet.</p>
-<% end %>
-
-<%= link_to 'Add Allergy', new_family_family_member_allergy_path(@family, @family_member), class: "btn btn-success" %>
-
-<h3>Vaccines</h3>
-<% if @family_member.vaccines.any? %>
-  <ul class="list-group mb-3">
-    <% @family_member.vaccines.order(created_at: :desc).each do |vaccine| %>
-      <li class="list-group-item">
-        <%= link_to vaccine.name, family_family_member_vaccine_path(@family, @family_member, vaccine) %>
-        — Date: <%= vaccine.vaccine_date %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No vaccines recorded yet.</p>
-<% end %>
-
-<%= link_to 'Add Vaccine', new_family_family_member_vaccine_path(@family, @family_member), class: "btn btn-success" %>
-
-<h3>Checkups</h3>
-<% if @family_member.checkups.any? %>
-  <ul class="list-group mb-3">
-    <% @family_member.checkups.order(created_at: :desc).each do |checkup| %>
-      <li class="list-group-item">
-        <%= link_to checkup.checkup_type, family_family_member_checkup_path(@family, @family_member, checkup) %>
-        — Date: <%= checkup.date %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No checkups recorded yet.</p>
-<% end %>
-
-<%= link_to 'Add Checkup', new_family_family_member_checkup_path(@family, @family_member), class: "btn btn-success" %>
+  <div class="mt-3">
+    <%= link_to 'Edit', edit_family_family_member_path(@family, @family_member), class: "btn btn-warning" %>
+    <%= link_to 'Delete', family_family_member_path(@family, @family_member), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <%= link_to 'Back to Family', family_path(@family), class: "btn btn-secondary" %>
+  </div>
 
 </div>
