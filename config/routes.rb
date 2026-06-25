@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :families, only: [ :show, :new, :create, :edit, :update, :destroy ] do
     resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ] do
-      resources :illnesses, only: [ :show, :new, :create, :edit, :update, :destroy ]
-      resources :doctor_visits, only: [ :show, :new, :create, :edit, :update, :destroy ]
-      resources :medications, only: [ :show, :new, :create, :edit, :update, :destroy ]
-      resources :allergies, only: [ :show, :new, :create, :edit, :update, :destroy ]
-      resources :vaccines, only: [ :show, :new, :create, :edit, :update, :destroy ]
-      resources :checkups, only: [ :show, :new, :create, :edit, :update, :destroy ]
+      resources :illnesses, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+      resources :doctor_visits, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+      resources :medications, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+      resources :allergies, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+      resources :vaccines, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+      resources :checkups, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
