@@ -30,7 +30,7 @@
     <%= link_to 'Delete', family_family_member_illness_path(@family, @family_member, @illness), 
     data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
 
-    <%= link_to "Back", family_family_member_path(@family_member.family, @family_member),
+    <%= link_to "Back", family_family_member_illnesses_path(@family_member.family, @family_member),
         class: "btn btn-secondary" %>
   </div>
 
