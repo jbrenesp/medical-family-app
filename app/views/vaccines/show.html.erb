@@ -18,7 +18,7 @@
     <%= link_to 'Delete', family_family_member_vaccine_path(@family, @family_member, @vaccine), 
     data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
 
-    <%= link_to "Back", family_family_member_path(@family, @family_member),
+    <%= link_to "Back", family_family_member_vaccines_path(@family, @family_member),
         class: "btn btn-secondary" %>
   </div>
 

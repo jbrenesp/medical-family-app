@@ -2,6 +2,12 @@ class VaccinesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_family_member
   before_action :set_vaccine, only: [ :show, :edit, :update, :destroy ]
+
+  def index
+    @vaccines = @family_member.vaccines.order(vaccine_date: :desc)
+  end
+
+
   def show
   end
 
