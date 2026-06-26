@@ -2,6 +2,11 @@ class MedicationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_family_member
   before_action :set_medication, only: [ :show, :edit, :update, :destroy ]
+
+  def index
+    @medications = @family_member.medications.order(start_date: :desc)
+  end
+
   def show
   end
 
