@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h1>Checkups for <%= @family_member.name %></h1>
+
+  <% if @checkups.any? %>
+    <ul class="list-group mt-3">
+      <% @checkups.each do |checkup| %>
+        <li class="list-group-item">
+          <%= link_to checkup.checkup_type, family_family_member_checkup_path(@family, @family_member, checkup) %>
+          — Date: <%= checkup.date %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-muted mt-3">No checkups recorded yet.</p>
+  <% end %>
+
+  <div class="mt-3">
+    <%= link_to 'Add Checkup', new_family_family_member_checkup_path(@family, @family_member), class: "btn btn-success" %>
+    <%= link_to 'Back', family_family_member_path(@family, @family_member), class: "btn btn-secondary" %>
+  </div>
+</div>

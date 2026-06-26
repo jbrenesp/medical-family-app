@@ -2,6 +2,11 @@ class CheckupsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_family_member
   before_action :set_checkup, only: [ :show, :edit, :update, :destroy ]
+
+  def index
+    @checkups = @family_member.checkups.order(date: :desc)
+  end
+
   def show
   end
 
