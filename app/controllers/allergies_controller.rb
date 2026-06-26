@@ -2,6 +2,11 @@ class AllergiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_family_member
   before_action :set_allergy, only: [ :show, :edit, :update, :destroy ]
+
+  def index
+    @allergies = @family_member.allergies.order(diagnosed_date: :desc)
+  end
+
   def show
   end
 
