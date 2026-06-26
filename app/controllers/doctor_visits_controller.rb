@@ -2,6 +2,12 @@ class DoctorVisitsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_family_member
   before_action :set_doctor_visit, only: [ :show, :edit, :update, :destroy ]
+
+
+  def index
+    @doctor_visits = @family_member.doctor_visits.order(visit_date: :desc)
+  end
+
   def show
   end
 
