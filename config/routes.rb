@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: [ :registrations ]
   resources :families, only: [ :show, :new, :create, :edit, :update, :destroy ] do
     resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ] do
       resources :illnesses, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  root to: "rails/welcome#index"
+  root to: "pages#home"
+  get "about", to: "pages#about"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
