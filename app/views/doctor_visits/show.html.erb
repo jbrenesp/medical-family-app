@@ -6,7 +6,7 @@
     <p><strong>Family Member:</strong> <%= @family_member.name %></p>
     <p><strong>Doctor name:</strong> <%= @doctor_visit.doctor_name %></p>
     <p><strong>City:</strong> <%= @doctor_visit.doctor_city %></p>
-    <p><strong>Visit date:</strong> <%= @doctor_visit.visit_date %></p>
+    <p><strong>Visit date:</strong> <%= format_date(@doctor_visit.visit_date) %></p>
     <p><strong>Visit type:</strong> <%= @doctor_visit.visit_type %></p>
     <p><strong>Illness:</strong>
       <% if @doctor_visit.illness %>

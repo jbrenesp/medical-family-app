@@ -5,8 +5,8 @@
  <div class="card p-3 mt-3">
   <p><strong>Family Member:</strong> <%= @family_member.name %></p>
   <p><strong>Name:</strong> <%= @illness.name %></p>
-  <p><strong>Start Date:</strong> <%= @illness.start_date %></p>
-  <p><strong>End Date:</strong> <%= @illness.end_date.present? ? @illness.end_date : "Not entered yet" %></p>
+  <p><strong>Start Date:</strong> <%= format_date(@illness.start_date) %></p>
+  <p><strong>End Date:</strong> <%= @illness.end_date.present? ? format_date(@illness.end_date) : "Not entered yet" %></p>
   <p><strong>Notes:</strong> <%= @illness.notes %></p>
   <p><strong>Doctor Visits:</strong>
   <% if @illness.doctor_visits.any? %>

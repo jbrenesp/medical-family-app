@@ -6,7 +6,7 @@
     <p><strong>Family Member:</strong> <%= @family_member.name %></p>
     <p><strong>Allergy:</strong> <%= @allergy.name %></p>
     <p><strong>Allergy type:</strong> <%= @allergy.allergy_type %></p>
-    <p><strong>Diagnosed date:</strong> <%= @allergy.diagnosed_date %></p>
+    <p><strong>Diagnosed date:</strong> <%= format_date(@allergy.diagnosed_date) %></p>
     <p><strong>Severity:</strong> <%= @allergy.severity %></p>
     <p><strong>Notes:</strong> <%= @allergy.notes %></p>
     

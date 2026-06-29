@@ -6,8 +6,8 @@
       <% @medications.each do |medication| %>
         <li class="list-group-item">
           <%= link_to medication.name, family_family_member_medication_path(@family, @family_member, medication) %>
-          — Start Date: <%= medication.start_date %>
-          — <%= medication.end_date.present? ? "Ended: #{medication.end_date}" : "Still active" %>
+          — Start Date: <%= format_date(medication.start_date) %>
+          — <%= medication.end_date.present? ? "Ended: #{format_date(medication.end_date)}" : "Still active" %>
         </li>
       <% end %>
     </ul>

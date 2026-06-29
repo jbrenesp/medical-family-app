@@ -6,7 +6,7 @@
       <% @allergies.each do |allergy| %>
         <li class="list-group-item">
           <%= link_to allergy.name, family_family_member_allergy_path(@family, @family_member, allergy) %>
-          — Diagnosed Date: <%= allergy.diagnosed_date %>
+          — Diagnosed Date: <%= format_date(allergy.diagnosed_date) %>
           — Severity: <%= allergy.severity  %>
         </li>
       <% end %>

@@ -5,7 +5,7 @@
   <div class="card p-3 mt-3">
     <p><strong>Family Member:</strong> <%= @family_member.name %></p>
     <p><strong>Checkup type:</strong> <%= @checkup.checkup_type %></p>
-    <p><strong>Date:</strong> <%= @checkup.date %></p>
+    <p><strong>Date:</strong> <%= format_date(@checkup.date) %></p>
     <p><strong>Results:</strong> <%= @checkup.results %></p>
     <p><strong>Notes:</strong> <%= @checkup.notes %></p>
     

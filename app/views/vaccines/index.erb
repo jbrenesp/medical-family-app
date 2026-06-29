@@ -6,7 +6,7 @@
       <% @vaccines.each do |vaccine| %>
         <li class="list-group-item">
           <%= link_to vaccine.name, family_family_member_vaccine_path(@family, @family_member, vaccine) %>
-          — Date of vaccination: <%= vaccine.vaccine_date %>
+          — Date of vaccination: <%= format_date(vaccine.vaccine_date) %>
         </li>
       <% end %>
     </ul>

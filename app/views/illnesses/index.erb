@@ -6,7 +6,7 @@
       <% @illnesses.each do |illness| %>
         <li class="list-group-item">
           <%= link_to illness.name, family_family_member_illness_path(@family, @family_member, illness) %>
-          — Started: <%= illness.start_date %>
+          — Started: <%= format_date(illness.start_date) %>
           — <%= illness.end_date.present? ? "Ended: #{illness.end_date}" : "Still active" %>
         </li>
       <% end %>

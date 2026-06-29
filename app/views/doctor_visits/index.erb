@@ -6,7 +6,7 @@
       <% @doctor_visits.each do |doctor_visit| %>
         <li class="list-group-item">
           <%= link_to doctor_visit.doctor_name, family_family_member_doctor_visit_path(@family, @family_member, doctor_visit) %>
-          — Date: <%= doctor_visit.visit_date %>
+          — Date: <%= format_date(doctor_visit.visit_date) %>
         </li>
       <% end %>
     </ul>

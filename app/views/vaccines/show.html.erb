@@ -5,8 +5,8 @@
   <div class="card p-3 mt-3">
     <p><strong>Family Member:</strong> <%= @family_member.name %></p>
     <p><strong>Name:</strong> <%= @vaccine.name %></p>
-    <p><strong>Date:</strong> <%= @vaccine.vaccine_date %></p>
-    <p><strong>Next due date:</strong> <%= @vaccine.next_due_date.present? ? @vaccine.next_due_date : "Not entered yet" %></p>
+    <p><strong>Date:</strong> <%= format_date(@vaccine.vaccine_date) %></p>
+    <p><strong>Next due date:</strong> <%= @vaccine.next_due_date.present? ? format_date(@vaccine.next_due_date) : "Not entered yet" %></p>
     <p><strong>Dose number:</strong> <%= @vaccine.dose_number %></p>
     <p><strong>Notes:</strong> <%= @vaccine.notes %></p>
     

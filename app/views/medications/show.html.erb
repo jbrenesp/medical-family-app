@@ -6,8 +6,8 @@
     <p><strong>Family Member:</strong> <%= @family_member.name %></p>
     <p><strong>Name:</strong> <%= @medication.name %></p>
     <p><strong>Medication type:</strong> <%= @medication.medication_type %></p>
-    <p><strong>Start date:</strong> <%= @medication.start_date %></p>
-    <p><strong>End Date:</strong> <%= @medication.end_date.present? ? @medication.end_date : "Not entered yet" %></p>
+    <p><strong>Start date:</strong> <%= format_date(@medication.start_date) %></p>
+    <p><strong>End Date:</strong> <%= @medication.end_date.present? ? format_date(@medication.end_date) : "Not entered yet" %></p>
     <p><strong>Related Illness:</strong>
       <% if @medication.illness %>
         <%= link_to @medication.illness.name,

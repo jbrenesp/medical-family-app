@@ -6,7 +6,7 @@
       <% @checkups.each do |checkup| %>
         <li class="list-group-item">
           <%= link_to checkup.checkup_type, family_family_member_checkup_path(@family, @family_member, checkup) %>
-          — Date: <%= checkup.date %>
+          — Date: <%= format_date(checkup.date) %>
         </li>
       <% end %>
     </ul>
