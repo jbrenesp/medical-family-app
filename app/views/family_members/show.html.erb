@@ -9,7 +9,7 @@
   <% end %>
 
   <% @upcoming_visits.each do |visit| %>
-    <p><strong>Doctor Visit:</strong> <%= link_to visit.doctor_name, family_family_member_doctor_visit_path(@family, @family_member, visit) %> — <%= visit.visit_type %> — <%= visit.visit_date %></p>
+    <p><strong>Doctor Visit:</strong> <%= link_to visit.doctor_name, family_family_member_doctor_visit_path(@family, @family_member, visit) %> — <%= visit.visit_type %> — <%= visit.visit_date %><strong> Pending</strong></p>
   <% end %>
 
   <% @active_medications.each do |medication| %>
