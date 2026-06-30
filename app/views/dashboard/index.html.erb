@@ -1,2 +1,143 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<%# app/views/dashboard/index.html.erb %>
+
+<div class="container mt-4">
+  <h1 class="mb-4">Family Health Dashboard</h1>
+
+  <%# Family member + year filters %>
+  <%= form_with url: dashboard_path, method: :get, local: true, class: "mb-4" do %>
+    <div class="row align-items-end">
+      <div class="col-md-4">
+        <label for="family_member_id" class="form-label">Filter by family member</label>
+        <%= select_tag :family_member_id,
+              options_for_select(
+                @family.family_members.map { |m| [m.name, m.id] },
+                @family_member&.id
+              ),
+              include_blank: "All family members",
+              class: "form-select",
+              onchange: "this.form.submit()" %>
+      </div>
+
+      <div class="col-md-4">
+        <label for="year" class="form-label">Year</label>
+        <%= select_tag :year,
+              options_for_select(@summary.available_years, @summary.year),
+              class: "form-select",
+              onchange: "this.form.submit()" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%# Illnesses section %>
+  <div class="card mb-4">
+    <div class="card-header">
+      <strong>Illnesses</strong>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p>Illnesses with a doctor visit: <strong><%= @summary.pct_with_doctor_visit %>%</strong></p>
+        </div>
+        <div class="col-md-6">
+          <p>Illnesses with medication: <strong><%= @summary.pct_with_medication %>%</strong></p>
+        </div>
+      </div>
+
+      <h6>Illnesses per month (<%= @summary.year %>)</h6>
+      <% if @summary.illnesses_per_month.present? %>
+        <table class="table table-sm">
+          <thead>
+            <tr><th>Month</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <% @summary.illnesses_per_month.each do |month, count| %>
+              <tr><td><%= month %></td><td><%= count %></td></tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="text-muted">No illness data for <%= @summary.year %>.</p>
+      <% end %>
+
+      <h6>Top recurring illnesses</h6>
+      <% if @summary.top_recurring_illnesses.present? %>
+        <ul class="list-group list-group-flush">
+          <% @summary.top_recurring_illnesses.each do |name, count| %>
+            <li class="list-group-item"><%= name.titleize %> — <%= count %> time<%= "s" if count != 1 %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-muted">No illness data yet.</p>
+      <% end %>
+
+      <h6 class="mt-3">Medications by illness</h6>
+      <% if @summary.medications_by_illness.present? %>
+        <ul class="list-group list-group-flush">
+          <% @summary.medications_by_illness.each do |entry| %>
+            <li class="list-group-item">
+              <%= entry[:name] %> — <%= entry[:medication_count] %> medication<%= "s" if entry[:medication_count] != 1 %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-muted">No illness data yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Medications section %>
+  <div class="card mb-4">
+    <div class="card-header">
+      <strong>Medications</strong>
+    </div>
+    <div class="card-body">
+      <p>Currently active medications: <strong><%= @summary.active_medications_count %></strong></p>
+    </div>
+  </div>
+
+  <%# Checkups section %>
+  <div class="card mb-4">
+    <div class="card-header">
+      <strong>Checkups</strong>
+    </div>
+    <div class="card-body">
+      <h6>By type</h6>
+      <% if @summary.checkups_by_type.present? %>
+        <table class="table table-sm">
+          <thead>
+            <tr><th>Type</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <% @summary.checkups_by_type.each do |type, count| %>
+              <tr><td><%= type.titleize %></td><td><%= count %></td></tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="text-muted">No checkup data yet.</p>
+      <% end %>
+
+      <h6 class="mt-3">Days since last checkup</h6>
+      <ul class="list-group list-group-flush">
+        <% @summary.days_since_last_checkup.each do |entry| %>
+          <li class="list-group-item">
+            <%= entry[:name] %> —
+            <%= entry[:days_since].nil? ? "No checkups yet" : "#{entry[:days_since]} days ago" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <%# Doctor visits section - only shown when a family member is selected %>
+  <% if @family_member %>
+    <div class="card mb-4">
+      <div class="card-header">
+        <strong>Doctor Visits — <%= @family_member.name %></strong>
+      </div>
+      <div class="card-body">
+        <p>Total doctor visits: <strong><%= @summary.doctor_visits_count %></strong></p>
+      </div>
+    </div>
+  <% end %>
+</div>
