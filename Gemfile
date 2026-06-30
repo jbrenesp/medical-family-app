@@ -75,3 +75,5 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
+
+gem "groupdate", "~> 6.8"
