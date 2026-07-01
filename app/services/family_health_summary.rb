@@ -5,7 +5,7 @@ class FamilyHealthSummary
   def initialize(family, family_member: nil, year: nil)
     @family = family
     @family_member = family_member
-    @year = year || Date.today.year
+    @year = year || most_recent_year_with_data || Date.today.year
   end
 
   def illnesses_per_month
@@ -80,5 +80,9 @@ class FamilyHealthSummary
 
   def checkups_scope
     @family_member ? @family_member.checkups : Checkup.where(family_member: @family.family_members)
+  end
+
+  def most_recent_year_with_data
+    illnesses_scope.pluck(:start_date).compact.map(&:year).max
   end
 end
