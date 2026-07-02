@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, skip: [ :registrations ]
+  get "recruiter", to: "pages#recruiter"
   get "dashboard", to: "dashboard#index", as: :dashboard
   resources :families, only: [ :show, :new, :create, :edit, :update, :destroy ] do
     resources :family_members, only: [ :show, :new, :create, :edit, :update, :destroy ] do

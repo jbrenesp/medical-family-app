@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     return if current_user.family.present?
     return if request.path == new_family_path || request.path == families_path
     return if request.path == destroy_user_session_path
+    return if request.path == recruiter_path
 
     redirect_to new_family_path, alert: "Please create a family to get started."
   end
