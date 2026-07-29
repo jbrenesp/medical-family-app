@@ -3,7 +3,7 @@
   <h1>Allergies Details</h1>
 
   <div class="card p-3 mt-3">
-    <p><strong>Family Member:</strong> <%= @family_member.name %></p>
+    <p><strong>Family Member:</strong> <%= link_to @family_member.name, family_family_member_path(@family, @family_member) %></p>
     <p><strong>Allergy:</strong> <%= @allergy.name %></p>
     <p><strong>Allergy type:</strong> <%= @allergy.allergy_type %></p>
     <p><strong>Diagnosed date:</strong> <%= format_date(@allergy.diagnosed_date) %></p>
@@ -19,7 +19,7 @@
     <%= link_to 'Delete', family_family_member_allergy_path(@family, @family_member, @allergy), 
     data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
 
-    <%= link_to "Back", family_family_member_allergies_path(@family, @family_member),
+    <%= link_to "Back to Allergies", family_family_member_allergies_path(@family, @family_member),
         class: "btn btn-secondary" %>
   </div>
 
