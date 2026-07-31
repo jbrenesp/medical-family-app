@@ -1,9 +1,9 @@
-<div class="container mt-4">
+<div class="container mt-4 pb-4">
 
   <h1>Doctor Visit Details</h1>
 
   <div class="card p-3 mt-3">
-    <p><strong>Family Member:</strong> <%= @family_member.name %></p>
+    <p><strong>Family Member:</strong> <%= link_to @family_member.name, family_family_member_path(@family, @family_member) %></p>
     <p><strong>Doctor name:</strong> <%= @doctor_visit.doctor_name %></p>
     <p><strong>City:</strong> <%= @doctor_visit.doctor_city %></p>
     <p><strong>Visit date:</strong> <%= format_date(@doctor_visit.visit_date) %></p>
@@ -16,20 +16,19 @@
         Not assigned
       <% end %>
     </p>
-    <p><strong>Notes:</strong> <%= @doctor_visit.notes %></p>
-    
-
-    
+    <p class="mb-0"><strong>Notes:</strong> <%= @doctor_visit.notes %></p>
   </div>
 
-  <div class="mt-3">
-    <%= link_to "Edit", edit_family_family_member_doctor_visit_path(@family, @family_member, @doctor_visit),
-        class: "btn btn-warning" %>
-    <%= link_to 'Delete', family_family_member_doctor_visit_path(@family, @family_member, @doctor_visit), 
-    data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
-
-    <%= link_to "Back", family_family_member_doctor_visits_path(@family, @family_member),
-        class: "btn btn-secondary" %>
+  <div class="border-top pt-3 mt-3">
+    <div class="d-flex flex-column flex-md-row gap-2">
+      
+      <%= link_to "Edit", edit_family_family_member_doctor_visit_path(@family, @family_member, @doctor_visit),
+          class: "btn btn-warning" %>
+      <%= link_to 'Delete', family_family_member_doctor_visit_path(@family, @family_member, @doctor_visit),
+          data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?" }, class: "btn btn-danger" %>
+      <%= link_to "Back to Doctor visits", family_family_member_doctor_visits_path(@family, @family_member),
+          class: "btn btn-secondary" %>
+    </div>
   </div>
 
 </div>
